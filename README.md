@@ -1,6 +1,7 @@
 # react-family-tree
 
 React component that renders a family tree.
+[Demo](https://sanichkotikov.github.io/react-family-tree-example/).
 
 ## Install
 
