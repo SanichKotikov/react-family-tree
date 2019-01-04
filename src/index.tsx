@@ -1,6 +1,12 @@
 import * as React from 'react';
-import relTree, { IFamilyNode } from 'relatives-tree';
+import relTree, { hasHiddenRelatives, IFamilyNode } from 'relatives-tree';
 import Connector from './connector';
+
+interface IRenderNodeOptions {
+  x: number;
+  y: number;
+  sub: boolean;
+}
 
 interface Props {
   nodes: IFamilyNode[];
@@ -8,7 +14,7 @@ interface Props {
   width: number;
   height: number;
   canvasClassName?: string;
-  renderNode: (node: IFamilyNode, point: { x: number, y: number }) => void;
+  renderNode: (node: IFamilyNode, options: IRenderNodeOptions) => void;
 }
 
 const ReactFamilyTree: React.FunctionComponent<Props> = (props) => {
@@ -45,6 +51,7 @@ const ReactFamilyTree: React.FunctionComponent<Props> = (props) => {
                 unit.nodes.map((node, idx) => props.renderNode(node, {
                   x: fX + (unit.shift * width) + (idx * (width * 2)),
                   y: fY,
+                  sub: hasHiddenRelatives(family, node),
                 }))
               ))
             )}
@@ -53,6 +60,7 @@ const ReactFamilyTree: React.FunctionComponent<Props> = (props) => {
                 unit.nodes.map((node, idx) => props.renderNode(node, {
                   x: fX + (unit.shift * width) + (idx * (width * 2)),
                   y: fY + props.height,
+                  sub: hasHiddenRelatives(family, node),
                 }))
               ))
             )}
