@@ -23,14 +23,14 @@ const HEIGHT = 80;
     rootId={rootId}
     width={WIDTH}
     height={HEIGHT}
-    renderNode={(node, point) => (
+    renderNode={(node) => (
         <FamilyNode
             key={node.id}
             node={node}
             style={{
                 width: WIDTH,
                 height: HEIGHT,
-                transform: `translate(${point.x}px, ${point.y}px)`,
+                transform: `translate(${node.left * (WIDTH / 2)}px, ${node.top * (HEIGHT / 2)}px)`,
             }}
         />
     )}
