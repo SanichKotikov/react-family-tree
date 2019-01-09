@@ -1,12 +1,6 @@
 import * as React from 'react';
-import relTree, { hasHiddenRelatives, IFamilyNode } from 'relatives-tree';
+import relTree, { IFamilyNode, IFamilyExtNode } from 'relatives-tree';
 import Connector from './connector';
-
-interface IRenderNodeOptions {
-  x: number;
-  y: number;
-  sub: boolean;
-}
 
 interface Props {
   nodes: IFamilyNode[];
@@ -14,7 +8,7 @@ interface Props {
   width: number;
   height: number;
   canvasClassName?: string;
-  renderNode: (node: IFamilyNode, options: IRenderNodeOptions) => void;
+  renderNode: (node: IFamilyExtNode) => void;
 }
 
 const ReactFamilyTree: React.FunctionComponent<Props> = (props) => {
@@ -40,33 +34,7 @@ const ReactFamilyTree: React.FunctionComponent<Props> = (props) => {
           height={height}
         />
       ))}
-      {data.families.map(family => {
-        const fX = family.left * width;
-        const fY = family.top * height;
-
-        return (
-          <React.Fragment key={family.id}>
-            {(family.type === 'parent' || family.type === 'root') && (
-              family.pUnits.map((unit) => (
-                unit.nodes.map((node, idx) => props.renderNode(node, {
-                  x: fX + (unit.shift * width) + (idx * (width * 2)),
-                  y: fY,
-                  sub: hasHiddenRelatives(family, node),
-                }))
-              ))
-            )}
-            {(family.type === 'child' || family.type === 'root') && (
-              family.cUnits.map((unit) => (
-                unit.nodes.map((node, idx) => props.renderNode(node, {
-                  x: fX + (unit.shift * width) + (idx * (width * 2)),
-                  y: fY + props.height,
-                  sub: hasHiddenRelatives(family, node),
-                }))
-              ))
-            )}
-          </React.Fragment>
-        );
-      })}
+      {data.nodes.map(props.renderNode)}
     </div>
   );
 };
