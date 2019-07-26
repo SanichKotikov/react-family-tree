@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { IConnector } from 'relatives-tree';
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   height: number;
 }
 
-const Connector: React.FunctionComponent<Props> = ({ connector, width, height }) => {
+export default React.memo<Props>(function Connector({ connector, width, height }) {
   const [x1, y1, x2, y2] = connector.points;
 
   return (
@@ -22,6 +22,4 @@ const Connector: React.FunctionComponent<Props> = ({ connector, width, height })
       }}
     />
   );
-};
-
-export default Connector;
+});

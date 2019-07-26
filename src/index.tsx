@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import relTree, { IFamilyNode, IFamilyExtNode } from 'relatives-tree';
 import Connector from './connector';
 
@@ -11,7 +11,7 @@ interface Props {
   renderNode: (node: IFamilyExtNode) => void;
 }
 
-const ReactFamilyTree: React.FunctionComponent<Props> = (props) => {
+export default React.memo<Props>(function ReactFamilyTree(props) {
   const data = relTree(props.nodes, props.rootId);
 
   const width = props.width / 2;
@@ -37,6 +37,4 @@ const ReactFamilyTree: React.FunctionComponent<Props> = (props) => {
       {data.nodes.map(props.renderNode)}
     </div>
   );
-};
-
-export default ReactFamilyTree;
+});
