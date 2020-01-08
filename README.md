@@ -2,7 +2,7 @@
 
 React component that renders a family tree.
 [Demo](https://sanichkotikov.github.io/react-family-tree-example/).
-
+[![Run on Repl.it](https://repl.it/badge/github/SanichKotikov/react-family-tree)](https://repl.it/github/SanichKotikov/react-family-tree)
 ## Install
 
 ```bash
