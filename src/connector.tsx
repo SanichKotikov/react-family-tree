@@ -1,5 +1,5 @@
 import React from 'react';
-import { IConnector } from 'relatives-tree';
+import { IConnector } from 'relatives-tree/lib/types';
 
 interface Props {
   connector: IConnector;

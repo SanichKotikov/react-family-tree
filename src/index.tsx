@@ -1,5 +1,6 @@
 import React from 'react';
-import relTree, { IFamilyNode, IFamilyExtNode } from 'relatives-tree';
+import calcTree from 'relatives-tree';
+import { IFamilyNode, IFamilyExtNode } from 'relatives-tree/lib/types';
 import Connector from './connector';
 
 interface Props {
@@ -7,19 +8,23 @@ interface Props {
   rootId: string;
   width: number;
   height: number;
-  canvasClassName?: string;
-  renderNode: (node: IFamilyExtNode) => void;
+  placeholders?: boolean;
+  className?: string;
+  renderNode: (node: IFamilyExtNode) => React.ReactNode;
 }
 
 export default React.memo<Props>(function ReactFamilyTree(props) {
-  const data = relTree(props.nodes, props.rootId);
+  const data = calcTree(props.nodes, {
+    rootId: props.rootId,
+    placeholders: props.placeholders,
+  });
 
   const width = props.width / 2;
   const height = props.height / 2;
 
   return (
     <div
-      className={props.canvasClassName}
+      className={props.className}
       style={{
         position: 'relative',
         width: data.canvas.width * width,
