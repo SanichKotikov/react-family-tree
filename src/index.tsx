@@ -4,7 +4,7 @@ import { IFamilyNode, IFamilyExtNode } from 'relatives-tree/lib/types';
 import Connector from './connector';
 
 interface Props {
-  nodes: IFamilyNode[];
+  nodes: ReadonlyArray<IFamilyNode>;
   rootId: string;
   width: number;
   height: number;
