@@ -1,6 +1,6 @@
 {
   "name": "react-family-tree",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "React component that renders a family tree",
   "main": "lib/index.js",
   "module": "lib/index.js",
@@ -31,10 +31,10 @@
   "devDependencies": {
     "@types/react": "16.9.41",
     "react": "16.13.1",
-    "typescript": "3.9.6"
+    "typescript": "4.2.3"
   },
   "dependencies": {
-    "relatives-tree": "2.0.x"
+    "relatives-tree": "3.0.x"
   },
   "homepage": "https://github.com/SanichKotikov/react-family-tree"
 }

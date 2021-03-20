@@ -1,16 +1,16 @@
 import React from 'react';
 import calcTree from 'relatives-tree';
-import { IFamilyNode, IFamilyExtNode } from 'relatives-tree/lib/types';
+import { Node, ExtNode } from 'relatives-tree/lib/types';
 import Connector from './connector';
 
 interface Props {
-  nodes: ReadonlyArray<IFamilyNode>;
+  nodes: ReadonlyArray<Node>;
   rootId: string;
   width: number;
   height: number;
   placeholders?: boolean;
   className?: string;
-  renderNode: (node: IFamilyExtNode) => React.ReactNode;
+  renderNode: (node: ExtNode) => React.ReactNode;
 }
 
 export default React.memo<Props>(function ReactFamilyTree(props) {
