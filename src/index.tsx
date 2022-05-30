@@ -1,9 +1,9 @@
-import React from 'react';
-import calcTree from 'relatives-tree';
-import { Node, ExtNode } from 'relatives-tree/lib/types';
-import Connector from './connector';
+import React from "react";
+import calcTree from "relatives-tree";
+import { Node, ExtNode } from "relatives-tree/lib/types";
+import Connector from "./connector";
 
-interface Props {
+type PropsType = {
   nodes: ReadonlyArray<Node>;
   rootId: string;
   width: number;
@@ -11,35 +11,47 @@ interface Props {
   placeholders?: boolean;
   className?: string;
   renderNode: (node: ExtNode) => React.ReactNode;
-}
+};
 
-export default React.memo<Props>(function ReactFamilyTree(props) {
-  const data = calcTree(props.nodes, {
-    rootId: props.rootId,
-    placeholders: props.placeholders,
+export default React.memo<PropsType>(function ReactFamilyTree({
+  nodes,
+  rootId,
+  width,
+  height,
+  placeholders,
+  className,
+  renderNode,
+}: PropsType): JSX.Element {
+  const {
+    canvas: { width: canvasWidth, height: canvasHeight },
+    connectors,
+    nodes: dataNodes,
+  } = calcTree(nodes, {
+    rootId,
+    placeholders,
   });
 
-  const width = props.width / 2;
-  const height = props.height / 2;
+  const localWidth = width / 2;
+  const localHeight = height / 2;
 
   return (
     <div
-      className={props.className}
+      className={className}
       style={{
-        position: 'relative',
-        width: data.canvas.width * width,
-        height: data.canvas.height * height,
+        position: "relative",
+        width: canvasWidth * width,
+        height: canvasHeight * height,
       }}
     >
-      {data.connectors.map((connector, idx) => (
+      {connectors.map((connector, idx) => (
         <Connector
           key={idx}
           connector={connector}
-          width={width}
-          height={height}
+          width={localWidth}
+          height={localHeight}
         />
       ))}
-      {data.nodes.map(props.renderNode)}
+      {dataNodes.map(renderNode)}
     </div>
   );
 });
